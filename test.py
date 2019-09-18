@@ -1,9 +1,11 @@
 import pandas as pd
 
 def Run():
-  #xlName = input('请输入文件名(带上excel格式 .xls或.xlsx):')
-  df=pd.read_excel('test.xlsx',sheet_name='Sheet1')
-  ef=pd.read_excel('test.xlsx',sheet_name='Sheet2')
+  xlName = input('请输入文件名(带上excel格式 .xls或.xlsx):')
+  sheet1 = input('请输入第一个表的名称:')
+  sheet2 = input('请输入第二个表的名称:')
+  df=pd.read_excel(xlName, sheet_name = sheet1)
+  ef=pd.read_excel(xlName, sheet_name = sheet2)
 
   #第一张表的匹配列名
   s1Name = df.ix[:,['合同']].values
@@ -30,8 +32,8 @@ def Run():
         df['金额'][i] = s2Amount[j]
 
   write = pd.ExcelWriter('new.xlsx')
-  df.to_excel(write,sheet_name='sheet1',index=False)
-  ef.to_excel(write,sheet_name='sheet2',index=False)
+  df.to_excel(write,sheet_name = sheet1,index=False)
+  ef.to_excel(write,sheet_name = sheet2,index=False)
   write.save()
   print('写入成功，文件名：new.xlsx')
 
